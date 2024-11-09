@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination.tsx";
 import { PacmanLoader } from "react-spinners";
+import './UserList.css';
 
 interface User {
     username: string;
     image: string;
     repos: number;
-    profileUrl: string; 
+    profileUrl: string;
 }
 
 interface UserListProps {
@@ -30,10 +31,9 @@ const UserList = ({ searchQuery }: UserListProps) => {
             })
                 .then((response) => response.json())
                 .then(({ users, pagination }) => {
-                    // Assuming API returns `profileUrl` for each user. If not, construct it as shown below
                     const userList = users.map((user: any) => ({
                         ...user,
-                        profileUrl: `https://github.com/${user.username}`, // Adjust if needed
+                        profileUrl: `https://github.com/${user.username}`, 
                     }));
                     setUsers(userList);
                     setPaginationData(pagination);
@@ -44,9 +44,9 @@ const UserList = ({ searchQuery }: UserListProps) => {
     }, [searchQuery, page]);
 
     return (
-        <div>
+        <div className="user-list-container">
             {loader ? (
-                <div>
+                <div className="loader-container">
                     Loading...
                     <PacmanLoader
                         color={"#000"}
@@ -58,21 +58,26 @@ const UserList = ({ searchQuery }: UserListProps) => {
                 </div>
             ) : (
                 <>
-                    {users.map((user) => (
-                        <a
-                            href={user.profileUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            key={user.username}
-                            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}
-                        >
-                            <img src={user.image} alt="user avatar" style={{ width: '50px', borderRadius: '50%' }} />
-                            <div style={{ marginLeft: '10px' }}>
-                                <div>{user.username}</div>
-                                <div>{user.repos} repositories</div>
-                            </div>
-                        </a>
-                    ))}
+                    {users.length > 0 && (
+                        <h2 className="results-header">Search Results</h2>
+                    )}
+                    <div className="user-grid">
+                        {users.map((user) => (
+                            <a
+                                href={user.profileUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                key={user.username}
+                                className="user-card"
+                            >
+                                <img src={user.image} alt="user avatar" className="user-avatar" />
+                                <div className="user-info">
+                                    <div className="user-name">{user.username}</div>
+                                    <div className="user-repos">{user.repos} repositories</div>
+                                </div>
+                            </a>
+                        ))}
+                    </div>
                     <Pagination paginationData={paginationData} setPage={setPage} page={page} />
                 </>
             )}

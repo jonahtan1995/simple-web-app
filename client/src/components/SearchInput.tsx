@@ -1,11 +1,11 @@
 import React from "react";
+import './SearchInput.css';
 
 interface SearchInputProps {
     setSearchQuery: (arg0: string) => void;
 }
 
-const SearchInput = ({setSearchQuery} : SearchInputProps) => {
-
+const SearchInput = ({ setSearchQuery }: SearchInputProps) => {
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -13,9 +13,13 @@ const SearchInput = ({setSearchQuery} : SearchInputProps) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Search..." />
-            <button type="submit">Search</button>
+        <form onSubmit={handleSubmit} className="search-form">
+            <input 
+                type="text" 
+                placeholder="Search GitHub users..." 
+                className="search-input"
+            />
+            <button type="submit" className="search-button">Search</button>
         </form>
     );
 }
