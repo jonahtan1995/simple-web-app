@@ -1,0 +1,12 @@
+{
+  "name": "cloud-ui",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "concurrently \"npm start -w server\" \"npm run dev -w client\" "
+  },
+  "workspaces": ["client", "server"],
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
