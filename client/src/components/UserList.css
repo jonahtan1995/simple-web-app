@@ -13,8 +13,42 @@
 }
 
 .loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
     text-align: center;
-    margin-top: 50px;
+}
+
+.loader-container .PacmanLoader {
+    margin-bottom: 20px;
+}
+
+
+/* More stylish "Loading..." text */
+
+.loader-container .loading-text {
+    font-size: px;
+    font-weight: bold;
+    color: #007bff;
+    /* Blue color for emphasis */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: fadeIn 1.5s ease-in-out infinite alternate;
+    margin-top: 10px;
+}
+
+
+/* Animation for the loading text */
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .user-grid {
