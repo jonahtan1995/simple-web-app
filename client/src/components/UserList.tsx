@@ -58,7 +58,8 @@ const UserList = ({ searchQuery }: UserListProps) => {
   return (
     <div className="user-list-container">
       {loader ? (
-        <div className="loader-container">
+         <div className="loader-container">
+        <div className="loading-text">Loading...</div> {}
           <PacmanLoader
             color={"#000"}
             loading={loader}
